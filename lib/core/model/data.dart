@@ -60,10 +60,7 @@ class AppData {
     //     category: "Trending Now"),
   ];
   static List<Category> categoryList = [
-    Category(
-        id: 1,
-        name: "Sneakers",
-        image: 'assets/shoe_thumb_2.png'),
+    Category(id: 1, name: "Sneakers", image: 'assets/shoe_thumb_2.png'),
     Category(id: 2, name: "Jacket", image: 'assets/jacket.png'),
     Category(id: 3, name: "Watch", image: 'assets/watch.png'),
     Category(id: 4, name: "Watch", image: 'assets/watch.png'),

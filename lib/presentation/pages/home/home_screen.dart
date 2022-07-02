@@ -1,13 +1,11 @@
 import 'package:ecommerce/core/common_widgets/product_card.dart';
 import 'package:ecommerce/core/common_widgets/product_icon.dart';
 import 'package:ecommerce/core/config/app_constants.dart';
-import 'package:ecommerce/core/controllers/home_controller.dart';
 import 'package:ecommerce/core/model/data.dart';
 import 'package:ecommerce/core/utils/theme/custom_theme_data.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -35,11 +33,10 @@ class HomeScreen extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         children: AppData.categoryList
             .map(
-              (category) => CommonProductIcon(
-            model: category
-          ),
-        )
-            .toList().cast<Widget>(),
+              (category) => CommonProductIcon(model: category),
+            )
+            .toList()
+            .cast<Widget>(),
       ),
     );
   }
@@ -60,16 +57,17 @@ class HomeScreen extends StatelessWidget {
         children: AppData.productList
             .map(
               (product) => CommonProductCard(
-            product: product,
-            onSelected: (model) {
-                for (var item in AppData.productList) {
-                  item.isSelected = false;
-                }
-                model.isSelected = true;
-            },
-          ),
-        )
-            .toList().cast<Widget>(),
+                product: product,
+                onSelected: (model) {
+                  for (var item in AppData.productList) {
+                    item.isSelected = false;
+                  }
+                  model.isSelected = true;
+                },
+              ),
+            )
+            .toList()
+            .cast<Widget>(),
       ),
     );
   }
@@ -92,7 +90,7 @@ class HomeScreen extends StatelessWidget {
                     hintText: "Search Products",
                     hintStyle: TextStyle(fontSize: 12),
                     contentPadding:
-                    EdgeInsets.only(left: 10, right: 10, bottom: 0, top: 5),
+                        EdgeInsets.only(left: 10, right: 10, bottom: 0, top: 5),
                     prefixIcon: Icon(Icons.search, color: Colors.black54)),
               ),
             ),
@@ -124,6 +122,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-
-

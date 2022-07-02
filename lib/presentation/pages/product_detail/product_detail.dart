@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 
 import '../../../core/model/data.dart';
 
-
 class ProductDetailPage extends StatefulWidget {
   const ProductDetailPage({Key? key}) : super(key: key);
 
@@ -21,8 +20,8 @@ class _ProductDetailPageState extends State<ProductDetailPage>
   @override
   void initState() {
     super.initState();
-    controller =
-        AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
+    controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 300));
     animation = Tween<double>(begin: 0, end: 1).animate(
         CurvedAnimation(parent: controller, curve: Curves.easeInToLinear));
     controller.forward();
@@ -51,13 +50,13 @@ class _ProductDetailPageState extends State<ProductDetailPage>
               Navigator.of(context).pop();
             },
           ),
-          _icon(isLiked ? Icons.favorite : Icons.favorite_border,
-              color: isLiked ? AppColors.red : AppColors.lightGrey,
-              size: 15,
-              padding: 12,
-              isOutLine: false,
-
-           ),
+          _icon(
+            isLiked ? Icons.favorite : Icons.favorite_border,
+            color: isLiked ? AppColors.red : AppColors.lightGrey,
+            size: 15,
+            padding: 12,
+            isOutLine: false,
+          ),
         ],
       ),
     );
@@ -69,7 +68,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
     double size = 20,
     double padding = 10,
     bool isOutLine = false,
-        Function? onPressed,
+    Function? onPressed,
   }) {
     return Container(
       height: 40,
@@ -142,20 +141,19 @@ class _ProductDetailPageState extends State<ProductDetailPage>
         child: child,
       ),
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: Container(
-          height: 40,
-          width: 50,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: AppColors.grey,
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          child: Container(
+            height: 40,
+            width: 50,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: AppColors.grey,
+              ),
+              borderRadius: const BorderRadius.all(Radius.circular(13)),
+              // color: Theme.of(context).backgroundColor,
             ),
-            borderRadius: const BorderRadius.all(Radius.circular(13)),
-            // color: Theme.of(context).backgroundColor,
-          ),
-          child: Image.asset(image),
-        )
-      ),
+            child: Image.asset(image),
+          )),
     );
   }
 
@@ -195,7 +193,8 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    const CommonTitleText(text: "NIKE AIR MAX 200", fontSize: 25),
+                    const CommonTitleText(
+                        text: "NIKE AIR MAX 200", fontSize: 25),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[

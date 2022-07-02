@@ -10,9 +10,9 @@ class CommonTitleText extends StatelessWidget {
   const CommonTitleText(
       {Key? key,
       required this.text,
-        this.fontSize = 18,
-        this.color = AppColors.titleTextColor,
-       this.fontWeight = FontWeight.w800})
+      this.fontSize = 18,
+      this.color = AppColors.titleTextColor,
+      this.fontWeight = FontWeight.w800})
       : super(key: key);
   @override
   Widget build(BuildContext context) {

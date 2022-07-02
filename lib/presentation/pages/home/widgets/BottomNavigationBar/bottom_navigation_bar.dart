@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'bottom_curved_Painter.dart';
+
 class CustomBottomNavigationBar extends StatefulWidget {
   final Function(int) onIconPressedCallback;
-  const CustomBottomNavigationBar({Key? key, required this.onIconPressedCallback})
+  const CustomBottomNavigationBar(
+      {Key? key, required this.onIconPressedCallback})
       : super(key: key);
 
   @override
@@ -33,12 +35,11 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar>
 
   @override
   void didChangeDependencies() {
-    if(_xController != null && _yController != null){
+    if (_xController != null && _yController != null) {
       _xController!.value =
           _indexToPosition(_selectedIndex) / MediaQuery.of(context).size.width;
       _yController!.value = 1.0;
     }
-
 
     super.didChangeDependencies();
   }
@@ -57,7 +58,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar>
 
   @override
   void dispose() {
-    if(_xController != null && _yController != null){
+    if (_xController != null && _yController != null) {
       _xController!.dispose();
       _yController!.dispose();
     }
@@ -133,11 +134,13 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar>
     _yController!.value = 1.0;
     _xController!.animateTo(
         _indexToPosition(index) / MediaQuery.of(context).size.width,
-        duration: const Duration(milliseconds: 300), curve: Curves.decelerate);
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.decelerate);
     Future.delayed(
       const Duration(milliseconds: 300),
       () {
-        _yController!.animateTo(1.0, duration: const Duration(milliseconds: 300));
+        _yController!
+            .animateTo(1.0, duration: const Duration(milliseconds: 300));
       },
     );
     _yController!.animateTo(0.0, duration: const Duration(milliseconds: 300));

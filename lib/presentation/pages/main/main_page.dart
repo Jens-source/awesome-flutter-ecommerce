@@ -8,10 +8,8 @@ import 'package:ecommerce/presentation/shopping_cart/shopping_cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class MainPage extends GetView<HomeController> {
   const MainPage({Key? key}) : super(key: key);
-
 
   Widget _appBar() {
     return Container(
@@ -58,47 +56,46 @@ class MainPage extends GetView<HomeController> {
   }
 
   Widget _title() {
-    return  Container(
-          margin: CustomTheme.padding,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+    return Container(
+      margin: CustomTheme.padding,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  CommonTitleText(
-                    text: controller.isHomePageSelected ? 'Our' : 'Shopping',
-                    fontSize: 27,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  CommonTitleText(
-                    text: controller.isHomePageSelected ? 'Products' : 'Cart',
-                    fontSize: 27,
-
-                    fontWeight: FontWeight.w700,
-                  ),
-                ],
+              CommonTitleText(
+                text: controller.isHomePageSelected ? 'Our' : 'Shopping',
+                fontSize: 27,
+                fontWeight: FontWeight.w400,
               ),
-              const Spacer(),
-              !controller.isHomePageSelected
-                  ? Container(
-                padding: const EdgeInsets.all(10),
-                child: const Icon(
-                  Icons.delete_outline,
-                  color: AppColors.orange,
-                ),
-              )
-                  : const SizedBox()
+              CommonTitleText(
+                text: controller.isHomePageSelected ? 'Products' : 'Cart',
+                fontSize: 27,
+                fontWeight: FontWeight.w700,
+              ),
             ],
           ),
+          const Spacer(),
+          !controller.isHomePageSelected
+              ? Container(
+                  padding: const EdgeInsets.all(10),
+                  child: const Icon(
+                    Icons.delete_outline,
+                    color: AppColors.orange,
+                  ),
+                )
+              : const SizedBox()
+        ],
+      ),
     );
   }
 
   void onBottomIconPressed(int index) {
     if (index == 0 || index == 1) {
-        controller.isHomePageSelected = true;
+      controller.isHomePageSelected = true;
     } else {
-        controller.isHomePageSelected = false;
+      controller.isHomePageSelected = false;
     }
   }
 
@@ -122,7 +119,8 @@ class MainPage extends GetView<HomeController> {
                     end: Alignment.bottomCenter,
                   ),
                 ),
-                child: GetX<HomeController>(builder: (controller) => Column(
+                child: GetX<HomeController>(
+                  builder: (controller) => Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       _appBar(),
@@ -134,10 +132,10 @@ class MainPage extends GetView<HomeController> {
                           switchOutCurve: Curves.easeOutBack,
                           child: controller.isHomePageSelected
                               ? const HomeScreen()
-                              :   const Align(
-                            alignment: Alignment.topCenter,
-                            child:  ShoppingCartPage(),
-                          ),
+                              : const Align(
+                                  alignment: Alignment.topCenter,
+                                  child: ShoppingCartPage(),
+                                ),
                         ),
                       )
                     ],
@@ -158,6 +156,3 @@ class MainPage extends GetView<HomeController> {
     );
   }
 }
-
-
-

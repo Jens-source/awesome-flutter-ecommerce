@@ -6,7 +6,6 @@ import 'package:ecommerce/core/utils/theme/custom_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class ShoppingCartPage extends StatelessWidget {
   const ShoppingCartPage({Key? key}) : super(key: key);
 

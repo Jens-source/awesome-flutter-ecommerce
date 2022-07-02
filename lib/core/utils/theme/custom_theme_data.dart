@@ -2,7 +2,6 @@ import 'package:ecommerce/core/config/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomTheme {
-  
   static ThemeData lightTheme = ThemeData(
       backgroundColor: AppColors.background,
       primaryColor: AppColors.background,
@@ -11,16 +10,16 @@ class CustomTheme {
       iconTheme: const IconThemeData(color: AppColors.iconColor),
       bottomAppBarColor: AppColors.background,
       dividerColor: AppColors.lightGrey,
-      primaryTextTheme:
-      const TextTheme(bodyText1: TextStyle(color: AppColors.titleTextColor)));
+      primaryTextTheme: const TextTheme(
+          bodyText1: TextStyle(color: AppColors.titleTextColor)));
 
   static TextStyle titleStyle =
-  const TextStyle(color: AppColors.titleTextColor, fontSize: 16);
+      const TextStyle(color: AppColors.titleTextColor, fontSize: 16);
   static TextStyle subTitleStyle =
-  const TextStyle(color: AppColors.subTitleTextColor, fontSize: 12);
+      const TextStyle(color: AppColors.subTitleTextColor, fontSize: 12);
 
   static TextStyle h1Style =
-  const TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
+      const TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
   static TextStyle h2Style = const TextStyle(fontSize: 22);
   static TextStyle h3Style = const TextStyle(fontSize: 20);
   static TextStyle h4Style = const TextStyle(fontSize: 18);
@@ -32,11 +31,8 @@ class CustomTheme {
   ];
 
   static EdgeInsets padding =
-  const EdgeInsets.symmetric(horizontal: 20, vertical: 10);
+      const EdgeInsets.symmetric(horizontal: 20, vertical: 10);
   static EdgeInsets hPadding = const EdgeInsets.symmetric(
     horizontal: 10,
   );
-
-
- 
 }
