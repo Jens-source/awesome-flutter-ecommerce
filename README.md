@@ -1,7 +1,9 @@
 # Flutter eCommerce App
 
+Product List             |  Product Detail              
+:-------------------------:|:-------------------------:
+<img src="https://user-images.githubusercontent.com/54096088/177034501-08dad691-49c6-4105-abfc-f0c3bedf0f2a.PNG" alt="drawing" style="width:200px;"/> |  !<img src="https://user-images.githubusercontent.com/54096088/177034506-7ef9b1b5-ae5a-4ae2-b6b6-6758389e355b.PNG" alt="drawing" style="width:200px;"/> |
 
-<img src="" alt="drawing" style="width:200px;"/>
 
 This project is created with flutter and supports both ios, android and the web.
 To start, clone the repository branches mentioned below:
