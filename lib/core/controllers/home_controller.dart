@@ -21,8 +21,8 @@ class HomeController extends GetxController {
   bool get isHomePageSelected => _isHomePageSelected.value;
 
   set isHomePageSelected(bool value) {
-    _isHomePageSelected.value = value;
-    _isHomePageSelected.refresh();
+    // _isHomePageSelected.value = value;
+    // _isHomePageSelected.refresh();
   }
 
   void addToCheckoutList(Product product) {
