@@ -4,19 +4,19 @@ import 'category.dart';
 
 class AppData {
   static List<List<Product>> productList = [
-    watchesList,
-    pantsList,
     shirtsList,
+    pantsList,
     sneakersList,
-    jacketList
+    jacketList,
+    watchesList,
   ];
 
   static List<Category> categoryList = [
-    Category(id: 3, name: "Shirts", image: 'assets/shirts/1.png'),
-    Category(id: 4, name: "Pants", image: 'assets/pants/1.png'),
-    Category(id: 0, name: "Sneakers", image: 'assets/shoes/1.png'),
-    Category(id: 1, name: "Jackets", image: 'assets/jackets/1.png'),
-    Category(id: 2, name: "Watches", image: 'assets/watches/1.png'),
+    Category(id: 0, name: "Shirts", image: 'assets/shirts/1.png'),
+    Category(id: 1, name: "Pants", image: 'assets/pants/1.png'),
+    Category(id: 2, name: "Sneakers", image: 'assets/shoes/1.png'),
+    Category(id: 3, name: "Jackets", image: 'assets/jackets/1.png'),
+    Category(id: 4, name: "Watches", image: 'assets/watches/1.png'),
   ];
 
   static List<Product> sneakersList = [
