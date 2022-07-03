@@ -34,7 +34,7 @@ class HomeScreen extends GetView<HomeController> {
       height: 80,
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: controller.checkoutList
+        children: AppData.categoryList
             .map(
               (category) => CommonProductIcon(
                   model: Category(

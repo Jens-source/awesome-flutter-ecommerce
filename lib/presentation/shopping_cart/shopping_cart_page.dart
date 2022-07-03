@@ -2,6 +2,7 @@ import 'package:ecommerce/core/common_widgets/title_text.dart';
 import 'package:ecommerce/core/config/app_constants.dart';
 import 'package:ecommerce/core/controllers/home_controller.dart';
 import 'package:ecommerce/core/model/product.dart';
+import 'package:ecommerce/core/utils/routes/app_pages.dart';
 import 'package:ecommerce/core/utils/theme/custom_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -105,7 +106,7 @@ class ShoppingCartPage extends GetView<HomeController> {
 
   Widget _submitButton(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () => Get.toNamed(Routes.ADDRESS_FORM),
       style: ButtonStyle(
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),

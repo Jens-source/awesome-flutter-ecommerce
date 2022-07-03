@@ -269,7 +269,7 @@ class ProductDetailPage extends GetView<HomeController> {
     );
   }
 
-  FloatingActionButton _flotingButton() {
+  FloatingActionButton _floatingButton() {
     return FloatingActionButton(
       onPressed: () => controller.addToCheckoutList(product),
       backgroundColor: AppColors.orange,
@@ -281,7 +281,7 @@ class ProductDetailPage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: _flotingButton(),
+      floatingActionButton: _floatingButton(),
       body: SafeArea(
         child: Container(
           decoration: const BoxDecoration(
