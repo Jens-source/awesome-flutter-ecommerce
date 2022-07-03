@@ -23,14 +23,15 @@ class CommonProductIcon extends GetView<HomeController> {
               child: Container(
                   margin:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                  child: Container(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
                     padding: CustomTheme.hPadding,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
                       color: controller.selectedCategory == model.id
                           ? AppColors.background
-                          : Colors.transparent,
+                          : Colors.white,
                       border: Border.all(
                         color: controller.selectedCategory == model.id
                             ? AppColors.orange

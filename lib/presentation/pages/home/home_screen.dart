@@ -1,13 +1,16 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/core/common_widgets/product_card.dart';
 import 'package:ecommerce/core/common_widgets/product_icon.dart';
 import 'package:ecommerce/core/config/app_constants.dart';
+import 'package:ecommerce/core/controllers/home_controller.dart';
+import 'package:ecommerce/core/model/category.dart';
 import 'package:ecommerce/core/model/data.dart';
 import 'package:ecommerce/core/utils/theme/custom_theme_data.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends GetView<HomeController> {
   const HomeScreen({Key? key}) : super(key: key);
 
   Widget _icon(IconData icon, {Color color = AppColors.iconColor}) {
@@ -31,9 +34,13 @@ class HomeScreen extends StatelessWidget {
       height: 80,
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: AppData.categoryList
+        children: controller.checkoutList
             .map(
-              (category) => CommonProductIcon(model: category),
+              (category) => CommonProductIcon(
+                  model: Category(
+                      id: category.id,
+                      name: category.name,
+                      image: category.image)),
             )
             .toList()
             .cast<Widget>(),
@@ -42,33 +49,21 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _productWidget() {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      width: Get.width,
-      height: Get.width * .7,
-      child: GridView(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1,
-            childAspectRatio: 4 / 3,
-            mainAxisSpacing: 30,
-            crossAxisSpacing: 20),
-        padding: const EdgeInsets.only(left: 20),
-        scrollDirection: Axis.horizontal,
-        children: AppData.productList
-            .map(
-              (product) => CommonProductCard(
-                product: product,
-                onSelected: (model) {
-                  for (var item in AppData.productList) {
-                    item.isSelected = false;
-                  }
-                  model.isSelected = true;
-                },
-              ),
-            )
-            .toList()
-            .cast<Widget>(),
-      ),
+    return GetX<HomeController>(
+      builder: (controller) => SizedBox(
+          width: Get.width,
+          height: Get.width * .8,
+          child: CarouselSlider(
+            options: CarouselOptions(
+                aspectRatio: 1,
+                enlargeCenterPage: true,
+                enableInfiniteScroll: false),
+            items: AppData.productList[controller.selectedCategory]
+                .map((product) => CommonProductCard(
+                      product: product,
+                    ))
+                .toList(),
+          )),
     );
   }
 

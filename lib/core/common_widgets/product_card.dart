@@ -1,29 +1,30 @@
 import 'package:ecommerce/core/common_widgets/title_text.dart';
 import 'package:ecommerce/core/config/app_constants.dart';
 import 'package:ecommerce/core/model/product.dart';
+import 'package:ecommerce/presentation/pages/product_detail/product_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CommonProductCard extends StatelessWidget {
   final Product product;
-  final ValueChanged<Product> onSelected;
-  const CommonProductCard(
-      {Key? key, required this.product, required this.onSelected})
-      : super(key: key);
+
+  const CommonProductCard({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: const BoxDecoration(
-          color: AppColors.background,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Color(0xfff8f8f8), blurRadius: 15, spreadRadius: 10),
-          ],
-        ),
-        margin: EdgeInsets.symmetric(vertical: !product.isSelected ? 20 : 0),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    return GestureDetector(
+      onTap: () => Get.to(ProductDetailPage(
+        product: product,
+      )),
+      child: Container(
+          decoration: const BoxDecoration(
+            color: AppColors.background,
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: Color(0xfff8f8f8), blurRadius: 15, spreadRadius: 10),
+            ],
+          ),
           child: Stack(
             alignment: Alignment.center,
             children: <Widget>[
@@ -31,10 +32,9 @@ class CommonProductCard extends StatelessWidget {
                 left: 0,
                 top: 0,
                 child: IconButton(
-                  icon: Icon(
-                    product.isliked ? Icons.favorite : Icons.favorite_border,
-                    color:
-                        product.isliked ? AppColors.red : AppColors.iconColor,
+                  icon: const Icon(
+                    Icons.favorite,
+                    color: AppColors.red,
                   ),
                   onPressed: () {},
                 ),
@@ -52,7 +52,10 @@ class CommonProductCard extends StatelessWidget {
                           radius: 40,
                           backgroundColor: AppColors.orange.withAlpha(40),
                         ),
-                        Image.asset(product.image)
+                        Image.asset(
+                          product.image,
+                          height: 180,
+                        )
                       ],
                     ),
                   ),
@@ -73,7 +76,7 @@ class CommonProductCard extends StatelessWidget {
                 ],
               ),
             ],
-          ),
-        ));
+          )),
+    );
   }
 }

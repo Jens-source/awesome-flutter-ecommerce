@@ -24,6 +24,7 @@ class MainPage extends GetView<HomeController> {
           ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(13)),
             child: Container(
+              height: 40,
               decoration: BoxDecoration(
                 color: Get.theme.backgroundColor,
                 boxShadow: const <BoxShadow>[

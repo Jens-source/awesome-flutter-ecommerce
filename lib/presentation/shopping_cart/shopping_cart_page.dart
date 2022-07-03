@@ -1,16 +1,18 @@
 import 'package:ecommerce/core/common_widgets/title_text.dart';
 import 'package:ecommerce/core/config/app_constants.dart';
-import 'package:ecommerce/core/model/data.dart';
+import 'package:ecommerce/core/controllers/home_controller.dart';
 import 'package:ecommerce/core/model/product.dart';
 import 'package:ecommerce/core/utils/theme/custom_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:velocity_x/velocity_x.dart';
 
-class ShoppingCartPage extends StatelessWidget {
+class ShoppingCartPage extends GetView<HomeController> {
   const ShoppingCartPage({Key? key}) : super(key: key);
 
   Widget _cartItems() {
-    return Column(children: AppData.cartList.map((x) => _item(x)).toList());
+    return Column(
+        children: controller.checkoutList.map((x) => _item(x)).toList());
   }
 
   Widget _item(Product model) {
@@ -32,20 +34,17 @@ class ShoppingCartPage extends StatelessWidget {
                         Align(
                           alignment: Alignment.bottomLeft,
                           child: Container(
+                            padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
                                 color: AppColors.lightGrey,
                                 borderRadius: BorderRadius.circular(10)),
+                            child: Image.asset(model.image),
                           ),
                         ),
                       ],
                     ),
                   ),
                 ),
-                Positioned(
-                  left: -20,
-                  bottom: -20,
-                  child: Image.asset(model.image),
-                )
               ],
             ),
           ),
@@ -91,7 +90,7 @@ class ShoppingCartPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         CommonTitleText(
-          text: '${AppData.cartList.length} Items',
+          text: '${controller.checkoutList.length} Items',
           color: AppColors.grey,
           fontSize: 14,
           fontWeight: FontWeight.w500,
@@ -128,7 +127,7 @@ class ShoppingCartPage extends StatelessWidget {
 
   double getPrice() {
     double price = 0;
-    for (var x in AppData.cartList) {
+    for (var x in controller.checkoutList) {
       price += x.price * x.id;
     }
     return price;
@@ -136,22 +135,66 @@ class ShoppingCartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: CustomTheme.padding,
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            _cartItems(),
-            const Divider(
-              thickness: 1,
-              height: 70,
+    return Material(
+        child: SizedBox(
+      height: Get.height,
+      width: Get.width,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            left: 10,
+            top: 40,
+            child: IconButton(
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+                size: 30,
+              ),
+              onPressed: () => Get.back(),
             ),
-            _price(),
-            const SizedBox(height: 30),
-            _submitButton(context),
-          ],
-        ),
+          ),
+          Positioned(
+            top: 100,
+            child: Container(
+              height: Get.height - 200,
+              width: Get.width,
+              padding: CustomTheme.padding,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    const Text(
+                      "Checkout items:",
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                    20.heightBox,
+                    _cartItems(),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 10,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              width: Get.width,
+              child: Column(
+                children: [
+                  const Divider(
+                    thickness: 1,
+                    height: 70,
+                  ),
+                  _price(),
+                  20.heightBox,
+                  _submitButton(context),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
-    );
+    ));
   }
 }

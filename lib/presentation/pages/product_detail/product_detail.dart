@@ -1,39 +1,17 @@
 import 'package:ecommerce/core/common_widgets/title_text.dart';
 import 'package:ecommerce/core/config/app_constants.dart';
+import 'package:ecommerce/core/controllers/home_controller.dart';
+import 'package:ecommerce/core/model/product.dart';
 import 'package:ecommerce/core/utils/theme/custom_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/model/data.dart';
 
-class ProductDetailPage extends StatefulWidget {
-  const ProductDetailPage({Key? key}) : super(key: key);
+class ProductDetailPage extends GetView<HomeController> {
+  const ProductDetailPage({Key? key, required this.product}) : super(key: key);
+  final Product product;
 
-  @override
-  State<ProductDetailPage> createState() => _ProductDetailPageState();
-}
-
-class _ProductDetailPageState extends State<ProductDetailPage>
-    with TickerProviderStateMixin {
-  late AnimationController controller;
-  late Animation<double> animation;
-  @override
-  void initState() {
-    super.initState();
-    controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 300));
-    animation = Tween<double>(begin: 0, end: 1).animate(
-        CurvedAnimation(parent: controller, curve: Curves.easeInToLinear));
-    controller.forward();
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  bool isLiked = true;
   Widget _appBar() {
     return Container(
       padding: CustomTheme.padding,
@@ -47,12 +25,12 @@ class _ProductDetailPageState extends State<ProductDetailPage>
             padding: 12,
             isOutLine: true,
             onPressed: () {
-              Navigator.of(context).pop();
+              Get.back();
             },
           ),
           _icon(
-            isLiked ? Icons.favorite : Icons.favorite_border,
-            color: isLiked ? AppColors.red : AppColors.lightGrey,
+            Icons.favorite,
+            color: AppColors.red,
             size: 15,
             padding: 12,
             isOutLine: false,
@@ -80,8 +58,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
             color: AppColors.iconColor,
             style: isOutLine ? BorderStyle.solid : BorderStyle.none),
         borderRadius: const BorderRadius.all(Radius.circular(13)),
-        color:
-            isOutLine ? Colors.transparent : Theme.of(context).backgroundColor,
+        color: isOutLine ? Colors.transparent : Get.theme.backgroundColor,
         boxShadow: const <BoxShadow>[
           BoxShadow(
               color: Color(0xfff8f8f8),
@@ -95,66 +72,12 @@ class _ProductDetailPageState extends State<ProductDetailPage>
   }
 
   Widget _productImage() {
-    return AnimatedBuilder(
-      builder: (context, child) {
-        return AnimatedOpacity(
-          duration: const Duration(milliseconds: 500),
-          opacity: animation.value,
-          child: child,
-        );
-      },
-      animation: animation,
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: <Widget>[
-          const CommonTitleText(
-            text: "AIP",
-            fontSize: 160,
-            color: AppColors.lightGrey,
-          ),
-          Image.asset('assets/show_1.png')
-        ],
-      ),
-    );
-  }
-
-  Widget _categoryWidget() {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 0),
-      width: Get.width,
-      height: 80,
-      child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:
-              AppData.showThumbnailList.map((x) => _thumbnail(x)).toList()),
-    );
-  }
-
-  Widget _thumbnail(String image) {
-    return AnimatedBuilder(
-      animation: animation,
-      //  builder: null,
-      builder: (context, child) => AnimatedOpacity(
-        opacity: animation.value,
-        duration: const Duration(milliseconds: 500),
-        child: child,
-      ),
-      child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          child: Container(
-            height: 40,
-            width: 50,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: AppColors.grey,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(13)),
-              // color: Theme.of(context).backgroundColor,
-            ),
-            child: Image.asset(image),
-          )),
-    );
+    return SizedBox(
+        height: 220,
+        child: Image.asset(
+          product.image,
+          fit: BoxFit.fitHeight,
+        ));
   }
 
   Widget _detailWidget() {
@@ -193,21 +116,22 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    const CommonTitleText(
-                        text: "NIKE AIR MAX 200", fontSize: 25),
+                    Flexible(
+                      child: CommonTitleText(text: product.name, fontSize: 25),
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const <Widget>[
-                            CommonTitleText(
+                          children: <Widget>[
+                            const CommonTitleText(
                               text: "\$ ",
                               fontSize: 18,
                               color: AppColors.red,
                             ),
                             CommonTitleText(
-                              text: "240",
+                              text: product.price.ceil().toString(),
                               fontSize: 25,
                             ),
                           ],
@@ -279,8 +203,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
             color: AppColors.iconColor,
             style: !isSelected ? BorderStyle.solid : BorderStyle.none),
         borderRadius: const BorderRadius.all(Radius.circular(13)),
-        color:
-            isSelected ? AppColors.orange : Theme.of(context).backgroundColor,
+        color: isSelected ? AppColors.orange : Get.theme.backgroundColor,
       ),
       child: CommonTitleText(
         text: text,
@@ -295,7 +218,7 @@ class _ProductDetailPageState extends State<ProductDetailPage>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const CommonTitleText(
-          text: "Available Size",
+          text: "Available Colors",
           fontSize: 14,
         ),
         const SizedBox(height: 20),
@@ -340,25 +263,18 @@ class _ProductDetailPageState extends State<ProductDetailPage>
   }
 
   Widget _description() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const CommonTitleText(
-          text: "Available Size",
-          fontSize: 14,
-        ),
-        const SizedBox(height: 20),
-        Text(AppData.description),
-      ],
+    return Text(
+      AppData.description,
+      style: const TextStyle(height: 1.4, fontSize: 16, letterSpacing: 0.3),
     );
   }
 
   FloatingActionButton _flotingButton() {
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: () => controller.addToCheckoutList(product),
       backgroundColor: AppColors.orange,
-      child: Icon(Icons.shopping_basket,
-          color: Theme.of(context).floatingActionButtonTheme.backgroundColor),
+      child: Icon(Icons.add_shopping_cart_outlined,
+          color: Get.theme.floatingActionButtonTheme.backgroundColor),
     );
   }
 
@@ -383,7 +299,6 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                 children: <Widget>[
                   _appBar(),
                   _productImage(),
-                  _categoryWidget(),
                 ],
               ),
               _detailWidget()
